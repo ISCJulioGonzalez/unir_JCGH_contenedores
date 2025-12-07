@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  app:
+    build: ./app
+    container_name: mi_app_java
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/mi_base
+      - SPRING_DATASOURCE_USERNAME=usuario
+      - SPRING_DATASOURCE_PASSWORD=clave
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    container_name: mi_db
+    restart: always
+    environment:
+      POSTGRES_DB: mi_base
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: clave
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
