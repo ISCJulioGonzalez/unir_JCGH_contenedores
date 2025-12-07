@@ -1,0 +1,16 @@
+# Usar la imagen oficial de Golang para compilar
+FROM golang:1.25 AS builder
+WORKDIR /app
+
+# Copiar el código fuente
+COPY . .
+
+# Compilar la aplicación
+RUN CGO_ENABLED=0 GOOS=linux go build -o main .
+
+# Usar una imagen mínima para la ejecución
+FROM alpine:latest
+WORKDIR /root/
+COPY --from=builder /app/main .
+EXPOSE 8000
+CMD ["./main"]
