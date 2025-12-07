@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mi Primera Docker App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>¡Hola desde Docker!</h1>
+        <p>Hostname: {{ hostname }}</p>
+        <p>Tiempo: {{ time }}</p>
+    </div>
+</body>
+</html>
